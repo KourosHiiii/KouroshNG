@@ -39,50 +39,13 @@ Grab the latest installer from the [Releases page](https://github.com/KourosHiii
 - `KouroshNG_x.y.z_x64-setup.exe` — standard installer (recommended)
 - `KouroshNG_x.y.z_x64_en-US.msi` — MSI package, for scripted or enterprise installs
 
-Windows x64 only for now — see [Building from source](#building-from-source) for other platforms.
+Windows x64 only for now.
 
 After installing, press **Connect**. Point your apps at the local SOCKS5 proxy to route traffic through the tunnel:
 
 ```sh
 curl -x socks5h://127.0.0.1:1819 https://www.cloudflare.com/cdn-cgi/trace
 ```
-
-## Building from source
-
-1. **Prerequisites**
-   - [Node.js](https://nodejs.org/) and npm
-   - [Rust](https://rustup.rs/) (stable toolchain)
-   - Tauri's platform prerequisites — see the [Tauri v2 prerequisites guide](https://v2.tauri.app/start/prerequisites/), on Windows this is the MSVC C++ Build Tools + WebView2 Runtime.
-
-2. **Install frontend dependencies**
-
-   ```sh
-   npm install
-   ```
-
-3. **Fetch the Aether binary**
-
-   KouroshNG bundles the real `aether` binary from [CluvexStudio/Aether releases](https://github.com/CluvexStudio/Aether/releases) rather than building it — this repo only ships the GUI. Fetch and checksum-verify it for your platform:
-
-   ```sh
-   ./src-tauri/binaries/fetch-aether.ps1
-   ```
-
-   (Windows as shown; the repo also ships `fetch-aether.sh` for Linux/macOS.)
-
-4. **Run in development mode**
-
-   ```sh
-   npm run tauri dev
-   ```
-
-5. **Build a release installer**
-
-   ```sh
-   npm run tauri build
-   ```
-
-   Installers land under `src-tauri/target/release/bundle/` (NSIS `.exe` and `.msi` on Windows; cross-platform bundles must each be built on their own OS, or via CI).
 
 ## How it works
 
